@@ -35,6 +35,5 @@ class SignInClient {
                 failure(error.localizedDescription)
             }
         }
-        
     }
 }

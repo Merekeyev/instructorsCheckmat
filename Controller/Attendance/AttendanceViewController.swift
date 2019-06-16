@@ -13,6 +13,17 @@ class AttendanceViewController: UIViewController {
     @IBOutlet weak var viewControllerStackViews: UIStackView!
     @IBOutlet weak var handView: UIView!
     @IBOutlet weak var qrView: UIView!
+
+    private var attendance: Attendance
+    
+    init(with attendance: Attendance) {
+        self.attendance = attendance
+        super.init(nibName: "AttendanceViewController", bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private var qrVC: QRViewController {
         let qrVC = QRViewController(nibName: "QRViewController", bundle: nil)
@@ -37,7 +48,6 @@ class AttendanceViewController: UIViewController {
         
         qrView.addSubview(qrVC.view)
         qrVC.didMove(toParent: self)
-        
         
         addChild(handVC)
         

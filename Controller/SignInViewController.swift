@@ -43,7 +43,7 @@ class SignInViewController: UIViewController {
     @IBAction func signInClicked(_ sender: Any) {
         viewModel.signIn(username: usernameTextField.text!, password: passwordTextField.text!, success: { [weak self] (user) in
             guard let self = self else { return }
-            let attendanceVC = AttendanceDateViewController.init(nibName: "AttendanceDateViewController", bundle: nil)
+            let attendanceVC = AttendanceDateViewController(with: user)
             self.navigationController?.pushViewController(attendanceVC, animated: true)
         }) { (errorMessage) in
             print(errorMessage)

@@ -10,6 +10,12 @@ import Foundation
 
 class ApiConstants {
     static let test = "http://checkmat.fractal.kz/api/v2"
+    
     static let signIn = "/auth/login"
     static let logout = "/auth/logout"
+    
+    static let getGroups = "/groups"
+    static let getGroupType = "/group-types"
+    
+    static let createAttendance = "/attendances"
 }

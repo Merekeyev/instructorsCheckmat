@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AttendanceDateViewController" customModule="InstructorsCheckmat" customModuleProvider="target">
             <connections>
+                <outlet property="chooseButton" destination="84B-HM-gn8" id="xfp-It-0eQ"/>
                 <outlet property="dateTextField" destination="v6y-j1-XiO" id="OQm-tA-VIj"/>
                 <outlet property="groupTextField" destination="5if-FB-Kjj" id="5oc-Y5-0Ab"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -22,11 +23,11 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="113" translatesAutoresizingMaskIntoConstraints="NO" id="Z9C-qa-5tj">
-                    <rect key="frame" x="80" y="180" width="864" height="88"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="Z9C-qa-5tj">
+                    <rect key="frame" x="80" y="100" width="864" height="216"/>
                     <subviews>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Дата " textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6y-j1-XiO">
-                            <rect key="frame" x="0.0" y="0.0" width="375.5" height="88"/>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Дата " minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v6y-j1-XiO">
+                            <rect key="frame" x="0.0" y="0.0" width="864" height="88"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="88" id="ihA-VA-tTk"/>
                             </constraints>
@@ -34,17 +35,17 @@
                             <fontDescription key="fontDescription" type="system" pointSize="40"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Группа" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5if-FB-Kjj">
-                            <rect key="frame" x="488.5" y="0.0" width="375.5" height="88"/>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Группа" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5if-FB-Kjj">
+                            <rect key="frame" x="0.0" y="128" width="864" height="88"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="40"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                     </subviews>
                 </stackView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="84B-HM-gn8">
-                    <rect key="frame" x="80" y="308" width="864" height="88"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="84B-HM-gn8" customClass="CommonButton" customModule="InstructorsCheckmat" customModuleProvider="target">
+                    <rect key="frame" x="80" y="356" width="864" height="88"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="88" id="hAr-jc-g2W"/>
                     </constraints>
@@ -66,7 +67,7 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Z9C-qa-5tj" secondAttribute="trailing" constant="80" id="3eJ-1w-cE1"/>
                 <constraint firstItem="84B-HM-gn8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="80" id="4gK-tx-EIl"/>
-                <constraint firstItem="Z9C-qa-5tj" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="160" id="5Ne-oO-4NS"/>
+                <constraint firstItem="Z9C-qa-5tj" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="80" id="5Ne-oO-4NS"/>
                 <constraint firstItem="84B-HM-gn8" firstAttribute="top" secondItem="Z9C-qa-5tj" secondAttribute="bottom" constant="40" id="RTw-RM-UuB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="84B-HM-gn8" secondAttribute="trailing" constant="80" id="gSy-dG-sQl"/>
                 <constraint firstItem="Z9C-qa-5tj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="80" id="rfp-aa-uL1"/>

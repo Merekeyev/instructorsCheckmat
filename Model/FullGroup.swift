@@ -37,6 +37,10 @@ class FullGroup {
         return groupType.title + ", " + group.day
     }
     
+    var groupId: Int {
+        return group.id
+    }
+    
     init(with group: Group, type: GroupType) {
         self.group = group
         self.groupType = type
