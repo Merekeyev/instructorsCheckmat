@@ -17,7 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let signInVC = SignInViewController(with: SignInViewModel(with: SignInClient()))
-        window?.rootViewController = signInVC
+        let navC = UINavigationController(rootViewController: signInVC)
+//        let attendanceVC = AttendanceViewController.init(nibName: "AttendanceViewController", bundle: nil)
+//        let navC = UINavigationController(rootViewController: attendanceVC)
+        window?.rootViewController = navC
         window?.makeKeyAndVisible()
         return true
     }

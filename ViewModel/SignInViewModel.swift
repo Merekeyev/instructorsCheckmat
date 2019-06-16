@@ -22,7 +22,7 @@ class SignInViewModel {
     
     init(with apiClient: SignInClient) {
         signInClient = apiClient
-        _ = combineLatest(username, password) { username, password in
+        combineLatest(username, password) { username, password in
             return username.count > 0 && password.count > 0
         }.bind(to: isEnabled)
     }

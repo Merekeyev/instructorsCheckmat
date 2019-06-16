@@ -14,7 +14,7 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var signInButton: CommonButton!
     
-    private var viewModel: SignInViewModel?
+    private var viewModel: SignInViewModel
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +28,7 @@ class SignInViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        _ = viewModel?.isEnabled.observeNext(with: { [unowned self] isEnabled in
-            self.signInButton.isEnabled = isEnabled
-        })
+        viewModel.isEnabled.bind(to: signInButton.reactive.isEnabled)
     }
 
     init(with viewModel: SignInViewModel) {
@@ -43,21 +41,22 @@ class SignInViewController: UIViewController {
     }
     
     @IBAction func signInClicked(_ sender: Any) {
-        guard let viewModel = viewModel else {return}
-        viewModel.signIn(username: usernameTextField.text!, password: passwordTextField.text!, success: { (user) in
-            
+        viewModel.signIn(username: usernameTextField.text!, password: passwordTextField.text!, success: { [weak self] (user) in
+            guard let self = self else { return }
+            let attendanceVC = AttendanceDateViewController.init(nibName: "AttendanceDateViewController", bundle: nil)
+            self.navigationController?.pushViewController(attendanceVC, animated: true)
         }) { (errorMessage) in
             print(errorMessage)
         }
     }
     
     @objc private func usernameTextFieldDidChange() {
-        guard let viewModel = viewModel, let text = usernameTextField.text else {return}
+        guard let text = usernameTextField.text else { return }
         viewModel.username.next(text)
     }
     
     @objc private func passwordTextFieldDidChange() {
-        guard let viewModel = viewModel, let text = passwordTextField.text else {return}
+        guard let text = passwordTextField.text else { return }
         viewModel.password.next(text)
     }
     
