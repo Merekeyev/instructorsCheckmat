@@ -30,14 +30,27 @@ class AttendanceDateViewController: UIViewController {
         }
     }
     
-    lazy var datePickerView: UIDatePicker = {
+    private var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "E, d MMM"
+        formatter.locale = Locale(identifier: "ru_RU")
+        return formatter
+    }()
+    
+    private var apiDateFormatter: DateFormatter = {
+        let apiDateFormatter = DateFormatter()
+        apiDateFormatter.dateFormat = "yyyy-MM-dd"
+        return apiDateFormatter
+    }()
+    
+    private lazy var datePickerView: UIDatePicker = {
         var pickerView = UIDatePicker()
         pickerView.datePickerMode = .date
         pickerView.locale = Locale(identifier: "ru_RU")
         return pickerView
     }()
     
-    lazy var groupPickerView: UIPickerView = {
+    private lazy var groupPickerView: UIPickerView = {
         var pickerView = UIPickerView()
         return pickerView
     }()
@@ -71,7 +84,8 @@ class AttendanceDateViewController: UIViewController {
         
         datePickerView.addTarget(self, action: #selector(dateDidChanged(sender:)), for: .valueChanged)
         
-        chooseButton.isEnabled = false
+        attendance.date = apiDateFormatter.string(from: Date())
+        dateTextField.text = dateFormatter.string(from: Date())
     }
     
     private func getGroups() {
@@ -108,15 +122,9 @@ class AttendanceDateViewController: UIViewController {
     }
     
     @objc private func dateDidChanged(sender: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "E, d MMM"
-        dateFormatter.locale = Locale(identifier: "ru_RU")
         dateTextField.text = dateFormatter.string(from: sender.date)
-        
-        let apiDateFormatter = DateFormatter()
-        apiDateFormatter.dateFormat = "yyyy-MM-dd"
+
         attendance.date = apiDateFormatter.string(from: sender.date)
-        checkChooseButton()
     }
     
     private func checkChooseButton() {
@@ -126,6 +134,7 @@ class AttendanceDateViewController: UIViewController {
             chooseButton.isEnabled = false
         }
     }
+    
 }
 
 extension AttendanceDateViewController: UITextFieldDelegate {
