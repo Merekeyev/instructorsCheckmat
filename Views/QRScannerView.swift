@@ -1,19 +1,45 @@
 //
-//  QRViewController.swift
+//  QRScannerView.swift
 //  InstructorsCheckmat
 //
-//  Created by Temirlan Merekeyev on 4/24/19.
+//  Created by Temirlan Merekeyev on 6/19/19.
 //  Copyright © 2019 Checkmat.kz. All rights reserved.
 //
 
 import UIKit
 import AVFoundation
 
-class QRViewController: UIViewController {
+class QRScannerView: UIView {
     
+    weak var delegate: QRScannerViewDelegate?
+    
+    /// capture settion which allows us to start and stop scanning.
     var captureSession: AVCaptureSession?
     
-    var video = AVCaptureVideoPreviewLayer()
+    // Init methods..
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        doInitialSetup()
+    }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        doInitialSetup()
+    }
+    
+    //MARK: overriding the layerClass to return `AVCaptureVideoPreviewLayer`.
+    override class var layerClass: AnyClass  {
+        return AVCaptureVideoPreviewLayer.self
+    }
+    
+    override var layer: AVCaptureVideoPreviewLayer {
+        let layer0 = super.layer as! AVCaptureVideoPreviewLayer
+        layer0.connection?.videoOrientation = .landscapeRight
+        return layer0
+    }
+    
+}
+
+extension QRScannerView {
     
     var isRunning: Bool {
         return captureSession?.isRunning ?? false
@@ -25,29 +51,28 @@ class QRViewController: UIViewController {
     
     func stopScanning() {
         captureSession?.stopRunning()
+        delegate?.qrScanningDidStop()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setup()
-    }
-    
-    private func setup() {
+    /// Does the initial setup for captureSession
+    private func doInitialSetup() {
+        clipsToBounds = true
         captureSession = AVCaptureSession()
-        let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
+        
+        guard let videoCaptureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) else { return }
         
         let videoInput: AVCaptureDeviceInput
         do {
-            videoInput = try AVCaptureDeviceInput(device: captureDevice!)
-        } catch {
-            print("Error")
+            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+        } catch let error {
+            print(error)
             return
         }
         
         if (captureSession?.canAddInput(videoInput) ?? false) {
             captureSession?.addInput(videoInput)
         } else {
-            print("Error")
+            scanningDidFail()
             return
         }
         
@@ -59,22 +84,27 @@ class QRViewController: UIViewController {
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr]
         } else {
-            print("Error")
+            scanningDidFail()
             return
         }
         
-        video = AVCaptureVideoPreviewLayer(session: captureSession!)
-        video.frame = view.layer.bounds
-        view.layer.addSublayer(video)
+        self.layer.session = captureSession
+        self.layer.videoGravity = .resizeAspectFill
+        
         captureSession?.startRunning()
+    }
+    func scanningDidFail() {
+        delegate?.qrScanningDidFail()
+        captureSession = nil
     }
     
     func found(code: String) {
-        print(code)
+        delegate?.qrScanningSucceededWithCode(code)
     }
+    
 }
 
-extension QRViewController: AVCaptureMetadataOutputObjectsDelegate {
+extension QRScannerView: AVCaptureMetadataOutputObjectsDelegate {
     func metadataOutput(_ output: AVCaptureMetadataOutput,
                         didOutput metadataObjects: [AVMetadataObject],
                         from connection: AVCaptureConnection) {
@@ -87,4 +117,5 @@ extension QRViewController: AVCaptureMetadataOutputObjectsDelegate {
             found(code: stringValue)
         }
     }
+    
 }

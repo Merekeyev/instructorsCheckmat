@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QRViewController" customModule="InstructorsCheckmat" customModuleProvider="target">
+            <connections>
+                <outlet property="scannerView" destination="lWV-Bx-fmW" id="1BT-Zu-v2a"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lWV-Bx-fmW" customClass="QRScannerView" customModule="InstructorsCheckmat" customModuleProvider="target">
+                    <rect key="frame" x="64" y="308" width="896" height="400"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="400" id="Esi-9R-EZJ"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="На тренировке 40 джитсеров" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubF-am-AZq">
+                    <rect key="frame" x="243.5" y="100" width="537" height="48"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="150" translatesAutoresizingMaskIntoConstraints="NO" id="IvE-ba-wwc">
+                    <rect key="frame" x="64" y="208" width="896" height="88"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2p-Ao-VSW" customClass="CommonButton" customModule="InstructorsCheckmat" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="373" height="88"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="88" id="N6r-5n-L6g"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                            <state key="normal" title="Поиск">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F53-h2-8JT" customClass="CommonButton" customModule="InstructorsCheckmat" customModuleProvider="target">
+                            <rect key="frame" x="523" y="0.0" width="373" height="88"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                            <state key="normal" title="Пробная">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="lWV-Bx-fmW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9jG-r1-CdT"/>
+                <constraint firstItem="ubF-am-AZq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Ryr-MR-dFf"/>
+                <constraint firstItem="IvE-ba-wwc" firstAttribute="top" secondItem="ubF-am-AZq" secondAttribute="bottom" constant="60" id="SQ7-RM-8TW"/>
+                <constraint firstItem="lWV-Bx-fmW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="64" id="U27-U4-nxw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lWV-Bx-fmW" secondAttribute="trailing" constant="64" id="VfD-sr-A9K"/>
+                <constraint firstItem="IvE-ba-wwc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="afk-FM-ac4"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="IvE-ba-wwc" secondAttribute="trailing" constant="64" id="jWk-gE-P3y"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lWV-Bx-fmW" secondAttribute="bottom" constant="60" id="ocj-gF-UN0"/>
+                <constraint firstItem="ubF-am-AZq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="80" id="ufF-U0-KFl"/>
+                <constraint firstItem="IvE-ba-wwc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="64" id="zeI-km-k0g"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

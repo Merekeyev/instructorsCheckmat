@@ -117,8 +117,8 @@ class AttendanceDateViewController: UIViewController {
     }
 
     @IBAction private func selectGroup(_ sender: UIButton) {
-        let attendanceViewController = AttendanceViewController(with: attendance)
-        navigationController?.pushViewController(attendanceViewController, animated: true)
+        let qrVC = QRViewController(with: attendance)
+        navigationController?.pushViewController(qrVC, animated: true)
     }
     
     @objc private func dateDidChanged(sender: UIDatePicker) {
