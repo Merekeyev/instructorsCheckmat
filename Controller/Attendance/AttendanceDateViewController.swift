@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class AttendanceDateViewController: UIViewController {
     
@@ -25,6 +26,7 @@ class AttendanceDateViewController: UIViewController {
     private var count = 0 {
         didSet {
             if count == 2 {
+                SVProgressHUD.dismiss()
                 createFullGroup()
             }
         }
@@ -67,6 +69,7 @@ class AttendanceDateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        SVProgressHUD.show()
         getGroups()
         getGroupTypes()
     }
@@ -117,8 +120,9 @@ class AttendanceDateViewController: UIViewController {
     }
 
     @IBAction private func selectGroup(_ sender: UIButton) {
-        let qrVC = QRViewController(with: attendance)
-        navigationController?.pushViewController(qrVC, animated: true)
+        guard let id = attendance.groupId, let date = attendance.date else { return }
+        let vc = SearchJitserViewController(attendanceGroupID: id, attendanceDate: date)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc private func dateDidChanged(sender: UIDatePicker) {
@@ -134,7 +138,6 @@ class AttendanceDateViewController: UIViewController {
             chooseButton.isEnabled = false
         }
     }
-    
 }
 
 extension AttendanceDateViewController: UITextFieldDelegate {

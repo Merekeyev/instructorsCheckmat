@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import KeychainAccess
+import SVProgressHUD
 
-class QRViewController: UIViewController {
+class QRViewController: UIViewController, Alertable {
     
     @IBOutlet private weak var scannerView: QRScannerView! {
         didSet {
@@ -17,17 +19,21 @@ class QRViewController: UIViewController {
     }
     
     private var attendance: Attendance
+    private var attendanceClient = AttendanceClient()
+    private var keychain = Keychain()
+    private var clientId = ""
+    private var clientDays = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if !scannerView.isRunning {
+            SVProgressHUD.show()
             scannerView.startScanning()
         }
     }
@@ -35,6 +41,7 @@ class QRViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if !scannerView.isRunning {
+            SVProgressHUD.dismiss()
             scannerView.stopScanning()
         }
     }
@@ -55,11 +62,22 @@ extension QRViewController: QRScannerViewDelegate {
     }
     
     func qrScanningSucceededWithCode(_ str: String?) {
-        guard let code = str else { return }
-        presentAlert(withTitle: "Code", message: code)
+        guard let code = str, let groupId = attendance.groupId, let date = attendance.date, let author = try? keychain.getString("userId"), let authorId = author, let tok = try? keychain.getString("accessToken"), let token = tok  else { return }
+        guard let authorIdInt = Int(authorId), let clientIdInt = Int(code) else { return }
+        clientId = code
+        let params: [String: Any] = ["group_id": String(describing: groupId), "date": date, "client_id": clientIdInt, "author_id": authorIdInt]
+        attendanceClient.createAttendance(with: params, token: token, success: { (attendance) in
+            SVProgressHUD.dismiss()
+            
+        }) { (error) in
+            SVProgressHUD.dismiss()
+            self.presentAlert(withTitle: "Ошибка", message: error)
+        }
     }
     
     func qrScanningDidStop() {
-//        presentAlert(withTitle: "", message: "Произошла ошибка при сканировании")
+        presentAlert(withTitle: "Успешно", message: "У вас осталось \(clientDays)") {
+            self.scannerView.startScanning()
+        }
     }
 }

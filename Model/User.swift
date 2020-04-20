@@ -36,4 +36,11 @@ class User: Codable {
         id = try container.decode(Int.self, forKey: .id)
         expired_at = try container.decode(Int.self, forKey: .expired_at)
     }
+    
+    init(with userId: Int, accessToken: String, id: Int, expiredDate: Int) {
+        user_id = userId
+        access_token = accessToken
+        self.id = id
+        expired_at = expiredDate
+    }
 }

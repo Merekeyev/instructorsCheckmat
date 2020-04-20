@@ -22,20 +22,34 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lWV-Bx-fmW" customClass="QRScannerView" customModule="InstructorsCheckmat" customModuleProvider="target">
-                    <rect key="frame" x="64" y="308" width="896" height="400"/>
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AGt-Yf-flH">
+                    <rect key="frame" x="212" y="100" width="600" height="88"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="На тренировке 40 джитсеров" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubF-am-AZq">
+                            <rect key="frame" x="31.5" y="20" width="537" height="48"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="400" id="Esi-9R-EZJ"/>
+                        <constraint firstAttribute="width" constant="600" id="48N-dB-bNr"/>
+                        <constraint firstItem="ubF-am-AZq" firstAttribute="centerY" secondItem="AGt-Yf-flH" secondAttribute="centerY" id="81H-z4-lhG"/>
+                        <constraint firstAttribute="height" constant="88" id="8oP-Xo-78d"/>
+                        <constraint firstItem="ubF-am-AZq" firstAttribute="centerX" secondItem="AGt-Yf-flH" secondAttribute="centerX" id="Yp5-nQ-Lsb"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="16"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="На тренировке 40 джитсеров" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubF-am-AZq">
-                    <rect key="frame" x="243.5" y="100" width="537" height="48"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="150" translatesAutoresizingMaskIntoConstraints="NO" id="IvE-ba-wwc">
-                    <rect key="frame" x="64" y="208" width="896" height="88"/>
+                    <rect key="frame" x="64" y="228" width="896" height="88"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2p-Ao-VSW" customClass="CommonButton" customModule="InstructorsCheckmat" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="373" height="88"/>
@@ -59,15 +73,15 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="lWV-Bx-fmW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9jG-r1-CdT"/>
-                <constraint firstItem="ubF-am-AZq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Ryr-MR-dFf"/>
-                <constraint firstItem="IvE-ba-wwc" firstAttribute="top" secondItem="ubF-am-AZq" secondAttribute="bottom" constant="60" id="SQ7-RM-8TW"/>
-                <constraint firstItem="lWV-Bx-fmW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="64" id="U27-U4-nxw"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lWV-Bx-fmW" secondAttribute="trailing" constant="64" id="VfD-sr-A9K"/>
+                <constraint firstItem="lWV-Bx-fmW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5X6-x8-KqP"/>
                 <constraint firstItem="IvE-ba-wwc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="afk-FM-ac4"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lWV-Bx-fmW" secondAttribute="bottom" id="ctB-m6-me1"/>
+                <constraint firstItem="AGt-Yf-flH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="d9K-o9-NJ7"/>
+                <constraint firstItem="AGt-Yf-flH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="80" id="f7O-iB-9iY"/>
+                <constraint firstItem="lWV-Bx-fmW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gOl-bX-tNw"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="IvE-ba-wwc" secondAttribute="trailing" constant="64" id="jWk-gE-P3y"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lWV-Bx-fmW" secondAttribute="bottom" constant="60" id="ocj-gF-UN0"/>
-                <constraint firstItem="ubF-am-AZq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="80" id="ufF-U0-KFl"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lWV-Bx-fmW" secondAttribute="trailing" id="rdx-et-otc"/>
+                <constraint firstItem="IvE-ba-wwc" firstAttribute="top" secondItem="AGt-Yf-flH" secondAttribute="bottom" constant="40" id="vgP-tS-0zq"/>
                 <constraint firstItem="IvE-ba-wwc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="64" id="zeI-km-k0g"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

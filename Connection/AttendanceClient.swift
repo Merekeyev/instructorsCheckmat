@@ -7,14 +7,28 @@
 //
 
 import Moya
+import KeychainAccess
 
 class AttendanceClient {
     
     typealias FailureComletion = ( (String) -> Void )
     typealias GroupsSuccessCompletion = ( ([Group]) -> Void )
     typealias GroupTypesSuccessCompletion = ( ([GroupType]) -> Void )
+    typealias AttendanceSuccessCompletion = ( (Attendance) -> Void )
+    typealias AttendancesSuccessCompletion = (([Attendance]) -> Void)
     
-    private var provider = MoyaProvider<AttendanceService>()
+    private var authPlugin: AccessTokenPlugin {
+//        let credentionalData = Data(TokenManager.shared.token.utf8).base64EncodedString()
+        return AccessTokenPlugin { TokenManager.shared.token }
+    }
+    
+    private var provider: MoyaProvider<AttendanceService> {
+        return MoyaProvider<AttendanceService>(plugins: [authPlugin])
+    }
+    
+    private let provider1 = MoyaProvider<AttendanceService>(plugins: [CredentialsPlugin { target -> URLCredential? in
+        return URLCredential(user: TokenManager.shared.token, password: "", persistence: .none)
+    }])
     
     func getGroups(success: @escaping GroupsSuccessCompletion, failure: @escaping FailureComletion) {
         provider.request(.getGroups) { (response) in
@@ -31,7 +45,7 @@ class AttendanceClient {
                     failure("Произошла ошибка. Попробуйте позже")
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                failure(error.localizedDescription)
             }
         }
     }
@@ -51,10 +65,42 @@ class AttendanceClient {
                     failure("Произошла ошибка. Попробуйте позже")
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                failure(error.localizedDescription)
             }
         }
     }
     
-//    func createAttendance(success: @escaping )
+    func createAttendance(with params: [String: Any], token: String, success: @escaping AttendanceSuccessCompletion, failure: @escaping FailureComletion) {
+        
+        provider.request(.createAttendance(body: params, token: token)) { (response) in
+            switch response.result {
+            case .success(let result):
+                if result.statusCode < 300 && result.statusCode >= 200 {
+        
+                } else {
+                    failure("Произошла ошибка. Попробуйте позже")
+                }
+            case .failure(let error):
+                failure(error.localizedDescription)
+            }
+        }
+    }
+    
+    func getAttendaces(groupID: Int, date: String, success: @escaping AttendancesSuccessCompletion, failure: @escaping FailureComletion) {
+        
+        provider1.request(.getAttendance(groupID: groupID, date: date)) { (response) in
+            switch response.result {
+            case .success(let result):
+                do {
+                    let decoder = JSONDecoder()
+                    let attendances = try decoder.decode([Attendance].self, from: result.data)
+                    success(attendances)
+                } catch {
+                    failure(error.localizedDescription)
+                }
+            case .failure(let error):
+                failure(error.localizedDescription)
+            }
+        }
+    }
 }

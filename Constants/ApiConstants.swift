@@ -9,7 +9,7 @@
 import Foundation
 
 class ApiConstants {
-    static let test = "http://checkmat.fractal.kz/api/v2"
+    static let test = "http://app.checkmat.kz/api/v2"
     
     static let signIn = "/auth/login"
     static let logout = "/auth/logout"
@@ -18,4 +18,22 @@ class ApiConstants {
     static let getGroupType = "/group-types"
     
     static let createAttendance = "/attendances"
+    static let getUsers = "/users"
+    static let getClients = "/clients"
+    static let getAttendance = "/attendances"
+}
+
+class TokenManager {
+    
+    var token: String {
+        return accessToken
+    }
+    
+    private var accessToken = String()
+    
+    static let shared = TokenManager()
+    
+    func setup(token: String) {
+        accessToken = token
+    }
 }
